@@ -46,14 +46,12 @@
             if (this.marker) {
             this.marker.setMap(null);
             }
-            
             // Add a new marker
             this.marker = new google.maps.Marker({
             position: newCenter,
             map: this.map
             });
             }
-
         }
     },
     watch: {

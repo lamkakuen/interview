@@ -10,7 +10,7 @@
   <TableWithPagination :records="records" />
   <div>
     <LocationButton @location-updated="handleLocationUpdated" />
-    <MapDisplay :latitude="latitude" :longitude="longitude" />
+    <MapDisplay :key="mapKey" :latitude="latitude" :longitude="longitude" :ref="mapDisplayRef" />
   </div>
 </template>
 
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
         latitude: 42.7566742,
-        longitude: -79.411775,
+        longitude: -78.411775,
+        mapKey: 1,
     };
   },
   methods: {
@@ -50,8 +51,9 @@ export default {
     handleLocationUpdated(latitude, longitude) {
       this.latitude = latitude;
       this.longitude = longitude;
-      console.log(this.latitude);
+      this.mapKey += 1;
     },
+    
   },
 }
 </script>

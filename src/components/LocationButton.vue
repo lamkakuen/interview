@@ -20,7 +20,7 @@
         const longitude = position.coords.longitude;
 
         // Emit the custom event with the latitude and longitude
-        this.$emit('location-updated', { latitude, longitude });
+        this.$emit('location-updated',  latitude, longitude );
         
         // Now you can use the latitude and longitude values as needed
         console.log('Latitude:', latitude);
