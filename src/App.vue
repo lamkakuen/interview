@@ -1,6 +1,5 @@
 <template>
   <div>
-    <SearchModule></SearchModule>
     <Button></Button>
     <!-- Use other custom components here -->
   </div>
@@ -10,6 +9,7 @@
   <TableWithPagination :records="records" />
   <div>
     <LocationButton @location-updated="handleLocationUpdated" />
+    <SearchModule @search-location="handleSearch"></SearchModule>
     <MapDisplay :key="mapKey" :latitude="latitude" :longitude="longitude" :ref="mapDisplayRef" />
   </div>
 </template>
@@ -38,8 +38,8 @@ export default {
   },
   data() {
     return {
-        latitude: 42.7566742,
-        longitude: -78.411775,
+        latitude: 42,
+        longitude: 42,
         mapKey: 1,
     };
   },
@@ -53,7 +53,43 @@ export default {
       this.longitude = longitude;
       this.mapKey += 1;
     },
-    
+    handleSearch(searchTerm) {
+      // Implement the logic to handle the search term received from the SearchModule component
+      // You can perform any necessary operations, such as updating the map or table with the search term
+
+      // Example logic:
+      // 1. Update the map with the new location
+      // 2. Add a marker for the searched location
+      // 3. Update the table with the new location
+
+      // Example code:
+      // Assuming you have a map instance available in the component's data
+
+      // 1. Update the map with the new location
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: searchTerm }, (results, status) => {
+        if (status === 'OK') {
+          const location = results[0].geometry.location;
+          this.map.setCenter(location);
+        } else {
+          console.error('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+
+      // 2. Add a marker for the searched location
+      const marker = new window.google.maps.Marker({
+        position: this.map.getCenter(),
+        map: this.map,
+        title: searchTerm,
+      });
+
+      // 3. Update the table with the new location
+      // Assuming you have a data property named 'locations' in the component to store the searched locations
+      this.locations.push({
+        name: searchTerm,
+        // Include any other relevant information about the location
+      });
+    },
   },
 }
 </script>

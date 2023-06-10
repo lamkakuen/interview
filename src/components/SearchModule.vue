@@ -1,7 +1,7 @@
 <template>
     <div>
-      <input type="text" v-model="location" @keyup.enter="searchLocation" class="input" placeholder="Enter a location" />
-      <button @click="searchLocation" class="button">Search</button>
+      <input v-model="searchTerm" type="text" placeholder="Enter location">
+      <button @click="search">Search</button>
     </div>
   </template>
   
@@ -9,13 +9,13 @@
   export default {
     data() {
       return {
-        location: '',
+        searchTerm: '', // Stores the search term entered by the user
       };
     },
-    name: 'CustomSearchModule',
     methods: {
-      searchLocation() {
-        // Code to search for the location
+      search() {
+        this.$emit('search-location', this.searchTerm);
+        console.log(this.searchTerm);
       },
     },
   };
