@@ -58,6 +58,7 @@
             
             //console.log(location,latitude,longitude);
           } else {
+            alert("Please enter a valid address!!");
             console.error('Geocode was not successful for the following reason: ' + status);
           }
         });
