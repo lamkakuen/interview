@@ -47,8 +47,8 @@ export default {
         mapKey: 1,
         records: [],
         recordId: 0,
-        timeZone: 'Asia/Jakarta', // Variable to store the time zone
-        localTime: '11:00', // Variable to store the local time
+        timeZone: 'Eastern Daylight Time', // Variable to store the time zone
+        localTime: '', // Variable to store the local time
     };
   },
   methods: {
