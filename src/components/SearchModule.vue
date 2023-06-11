@@ -22,14 +22,41 @@
             const location = results[0].geometry.location;
             const latitude = location.lat();
             const longitude = location.lng();
-
-            // Emit an event to notify the parent component about the searched location
-            this.$emit('search-location', {
-              address: this.searchTerm,
-              latitude,
-              longitude,
-            });
-            console.log(location,latitude,longitude);
+            //const timeZone = results[0].timeZoneId;
+            const apiKey = 'AIzaSyCkV5-OTH4mE87kMCAE-Hgm6wol_LvtZeM';
+            const apiUrl = `https://maps.googleapis.com/maps/api/timezone/json?location=${latitude},${longitude}&timestamp=${Math.floor(Date.now() / 1000)}&key=${apiKey}`;
+            
+            fetch(apiUrl)
+              .then(response => response.json())
+              .then(data => {
+                if (data.status === 'OK') {
+                  const timeZoneId = data.timeZoneId;
+                  const timeZoneName = data.timeZoneName;
+                  
+                  const currentTime = new Date().toLocaleString('en-US', {
+                    timeZone: timeZoneId,
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                  });
+                  this.$emit('search-location', {
+                    address: this.searchTerm,
+                    latitude,
+                    longitude,
+                    timeZoneName,
+                    currentTime
+                  });
+                  // Use the time zone information as needed
+                } else {
+                  console.error('Unable to retrieve time zone information');
+                }
+              })
+              .catch(error => {
+                console.error('Error occurred while fetching time zone information:', error);
+              });
+              // Emit an event to notify the parent component about the searched location
+            
+            //console.log(location,latitude,longitude);
           } else {
             console.error('Geocode was not successful for the following reason: ' + status);
           }

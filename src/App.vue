@@ -1,13 +1,12 @@
 <template>
  <div>
-    <Button></Button>
     <!-- Use other custom components here -->
   </div>
   <div>
+    <TableWithPagination ref="tableRef" />
+    <div>
     <TimeDisplay :timeZone="timeZone" :localTime="localTime" />
   </div>
-  <div>
-    <TableWithPagination ref="tableRef" />
   </div>
   <div>
     <LocationButton @location-updated="handleLocationUpdated" />
@@ -21,12 +20,9 @@ import MapDisplay from './components/MapDisplay.vue';
 import SearchModule from './components/SearchModule.vue';
 import TableWithPagination from './components/TableWithPagination.vue';
 import TimeDisplay from './components/TimeDisplay.vue';
-import Button from './components/Button.vue';
 import LocationButton from './components/LocationButton.vue';
 export default {
   props: {
-    timeZone: String,
-    localTime: String,
   },
   computed: {
     paginatedRecords() {
@@ -38,7 +34,6 @@ export default {
   },
   name: 'App',
   components: {
-    Button,
     MapDisplay,
     SearchModule,
     TableWithPagination,
@@ -52,6 +47,8 @@ export default {
         mapKey: 1,
         records: [],
         recordId: 0,
+        timeZone: 'Asia/Jakarta', // Variable to store the time zone
+        localTime: '11:00', // Variable to store the local time
     };
   },
   methods: {
@@ -68,7 +65,9 @@ export default {
       this.records = [];
       this.latitude = searchTerm.latitude;
       this.longitude = searchTerm.longitude;
-      
+      this.timeZone = searchTerm.timeZoneName;
+      this.localTime = searchTerm.currentTime;
+      console.log(searchTerm);
       //const locationData = searchTerm.address;
       //const latitudeData = this.latitude;
       //const longitudeData = this.longitude;
@@ -80,7 +79,6 @@ export default {
         longitude: searchTerm.longitude,
       };
       this.addRecord(newRecord);
-      console.log(this.records);
       this.mapKey += 1;
     },
     deleteRecords(selectedIndices) {
