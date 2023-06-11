@@ -1,7 +1,7 @@
 <template>
     <div>
       <input v-model="searchTerm" type="text" placeholder="Enter location">
-      <button @click="search">Search</button>
+      <button @click="searchLocation">Search</button>
     </div>
   </template>
   
@@ -13,9 +13,27 @@
       };
     },
     methods: {
-      search() {
-        this.$emit('search-location', this.searchTerm);
-        console.log(this.searchTerm);
+      searchLocation() {
+      // Call the geocode function to convert the search term into coordinates
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: this.searchTerm }, (results, status) => {
+          if (status === 'OK' && results.length > 0) {
+            // Get the latitude and longitude from the first result
+            const location = results[0].geometry.location;
+            const latitude = location.lat();
+            const longitude = location.lng();
+
+            // Emit an event to notify the parent component about the searched location
+            this.$emit('search-location', {
+              address: this.searchTerm,
+              latitude,
+              longitude,
+            });
+            console.log(location,latitude,longitude);
+          } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+          }
+        });
       },
     },
   };

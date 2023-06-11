@@ -5,9 +5,13 @@
   </template>
   
   <script>
-  /* global google */
   
   export default {
+    data() {
+      return {
+        map: null,
+      };
+    },
     name: 'MapDisplay',
     mounted() {
       this.initMap();
@@ -36,6 +40,13 @@
         });
 
         this.marker = marker;
+      },
+      initializeMap() {
+        const mapOptions = {
+          center: { lat: this.latitude, lng: this.longitude },
+          zoom: 12,
+        };
+        this.map = new google.maps.Map(this.$refs.mapContainer, mapOptions);
       },
       updateMap() {
         if (this.map) {
