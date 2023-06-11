@@ -85,6 +85,6 @@
   <style>
   #map {
     height: 400px;
-    width: 100%;
+    width: 600px;
   }
   </style>

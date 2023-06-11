@@ -22,11 +22,11 @@
         </tr>
       </tbody>
     </table>
-    <button @click="deleteSelectedRecords" class="button">Delete Selected</button>
+    <button  @click="deleteSelectedRecords" class="button d-color-button button:hover button:active">Delete Selected</button>
     <div class="pagination">
       <button @click="previousPage" :disabled="currentPage === 1" class="button">Previous</button>
       <span>{{ currentPage }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages" class="button">Next</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages || totalPages === 0" class="button">Next</button>
     </div>
   </div>
 </template>
@@ -109,5 +109,64 @@ export default {
 
 .pagination button {
   margin: 0 5px;
+  border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
 }
+  .container {
+  }
+
+  .content {
+    display: flex;
+  }
+
+  .left-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-location {
+    display: flex;
+    align-items: center;
+  }
+
+  .d-color-button {
+    background-color: #ad1a2d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .p-color-button {
+    background-color: #28b91b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .button:hover {
+    box-shadow: 0 2px 8px rgba(50, 50, 50, 0.3);
+  }
+
+  .button:active {
+    box-shadow: 0 2px 8px rgba(50, 50, 50, 0.3);
+  }
+
 </style>

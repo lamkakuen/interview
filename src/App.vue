@@ -1,17 +1,27 @@
 <template>
- <div>
-    <!-- Use other custom components here -->
-  </div>
-  <div>
-    <TableWithPagination ref="tableRef" />
-    <div>
-    <TimeDisplay :timeZone="timeZone" :localTime="localTime" />
-  </div>
-  </div>
-  <div>
-    <LocationButton @location-updated="handleLocationUpdated" />
-    <SearchModule @search-location="handleSearch"></SearchModule>
-    <MapDisplay :key="mapKey" :latitude="latitude" :longitude="longitude" :ref="mapDisplayRef" />
+  <div class="container">
+    <div class="header">
+      <h1>Geoff Lam Location App</h1>
+    </div>
+    <div class="content">
+      <div class="left-panel">
+        <div class="time-display">
+          <TimeDisplay :timeZone="timeZone" :localTime="localTime" />
+        </div>
+        <div class="map-display">
+          <MapDisplay :key="mapKey" :latitude="latitude" :longitude="longitude" :ref="mapDisplayRef" />
+        </div>
+      </div>
+      <div class="right-panel">
+        <div class="search-location">
+          <SearchModule @search-location="handleSearch" />
+          <LocationButton @location-updated="handleLocationUpdated" />
+        </div>
+        <div class="table-with-pagination">
+          <TableWithPagination ref="tableRef" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -105,4 +115,25 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.header {
+    background-color: #96969665;
+    padding: 20px;
+  }
+
+  .table-with-pagination{
+    margin-top: 3px;
+  }
+
 </style>

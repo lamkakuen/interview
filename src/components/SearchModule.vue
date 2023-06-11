@@ -1,7 +1,7 @@
 <template>
     <div>
-      <input v-model="searchTerm" @keyup.enter="searchLocation" type="text" placeholder="Enter location">
-      <button @click="searchLocation">Search</button>
+      <input class="input" v-model="searchTerm" @keyup.enter="searchLocation" type="text" placeholder="Enter location">
+      <button class="button" @click="searchLocation">Search</button>
     </div>
   </template>
   
@@ -87,4 +87,59 @@
     cursor: pointer;
     margin-left: 10px;
   }
-  </style>
+
+  .content {
+    display: flex;
+  }
+
+  .left-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-location {
+    display: flex;
+    align-items: center;
+  }
+
+ 
+
+  .color-button {
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .input {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .input:focus {
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .button:hover {
+    box-shadow: 0 2px 8px rgba(50, 50, 50, 0.3);
+  }
+
+  .button:active {
+    box-shadow: 0 2px 8px rgba(50, 50, 50, 0.3);
+  }
+  /* Add additional styling as needed for other sections */
+</style>
